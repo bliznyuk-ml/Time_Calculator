@@ -1,10 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+    <style>
+        #sout {
+            padding: 8px;
+            font-size: 1.3em;
+            display: block;
+            min-height: 400px;
+            background: black;
+            color: white;
+            font-family: monospace;
+            width: 100%;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        header {
+            width: 100%;
+            min-height: 900px;
+            background-color: black;
+        }
+
+        h1 {
+            color: chartreuse;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .display {
+            position: relative;
+            width: 80%;
+            height: 180pt;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
+            border-radius: 10px;
+            background-color: dimgray;
+            color: darkslategrey;
+            text-align: center;
+            font-size: 160pt;
+            line-height: 160pt;
+            border: 5px solid darkslategrey;
+            text-shadow: cadetblue 10px 5px 5px;
+        }
+
+        .timeForm {
+            display: inline-block;
+            width: 20%;
+            height: 300px;
+            position: relative;
+            margin-left: 50px;
+            margin-bottom: 50px;
+            font-size: 25pt;
+            padding: 20px;
+            background-color: darkslategray;
+        }
+
+        input {
+            display: block;
+            float: right;
+            width: 25%;
+            font-size: 25pt;
+            margin: 5px;
+        }
+
+        label {
+            display: inline-block;
+            width: 40%;
+            float: left;
+            margin: 5px;
+        }
+
+        .button {
+            width: 100%;
+        }
+
+        div {
+            text-align: center;
+            padding-bottom: 20px;
+            color: chartreuse;
+        }
+
+        .jetLag {
+            display: inline-block;
+            width: 40%;
+            height: 300px;
+            position: relative;
+            margin-left: 50px;
+            font-size: 25pt;
+            padding: 20px;
+            background-color: darkslategray;
+        }
+
+
+    </style>
 </head>
 <body>
-$END$
+<!--<output id="sout"></output>-->
+<script src="js/time.js"></script>
+<header>
+    <h1>Time calculator</h1>
+
+    <div class="display" id="display"></div>
+
+    <form oninvalid="return false" class="timeForm">
+        <div>Time to seconds</div>
+        <label for="hours">Hours</label>
+        <input name="hours" id="hours"
+               type="number" step="1" min="0" max="60"
+               oninvalid="return false"><br/>
+        <label for="minutes">Minutes</label>
+        <input name="minutes" id="minutes"
+               type="number" step="1" min="0" max="60"
+               oninvalid="return false"><br/>
+        <label for="seconds">Seconds</label>
+        <input name="seconds" id="seconds"
+               type="number" step="1" min="0" max="60"
+               oninvalid="return false">
+        <br/><br/>
+        <input type="submit"
+               id="sub"
+               value="Calculate"
+               class="button"
+               onclick="printSeconds(
+                document.getElementById('hours').value,
+                document.getElementById('minutes').value,
+                document.getElementById('seconds').value);
+                ">
+    </form>
+
+    <form oninvalid="return false" class="timeForm">
+        <div>Seconds to time</div>
+        <label for="secToTime">Seconds</label>
+        <input name="secToTime" id="secToTime"
+               type="text" oninvalid="return false">
+        <br/><br/><br/><br/>
+        <input type="submit" id="sub2"
+               value="Calculate"
+               class="button"
+               onclick="countTime(document.getElementById('secToTime').value)">
+    </form>
+
+    <form oninvalid="return false" class="jetLag">
+        <div>Difference in time</div>
+        <label for="hours1">Hours</label>
+        <input name="hours2" id="hours2"
+               type="number" step="1" min="0" max="60"
+               placeholder="2-nd"
+               oninvalid="return false">
+        <input name="hours1" id="hours1"
+               type="number" step="1" min="0" max="60"
+               placeholder="1-st"
+               oninvalid="return false">
+        <br/>
+        <label for="minutes1">Minutes</label>
+        <input name="minutes2" id="minutes2"
+               type="number" step="1" min="0" max="60"
+               placeholder="2-nd"
+               oninvalid="return false">
+        <input name="minutes1" id="minutes1"
+               type="number" step="1" min="0" max="60"
+               placeholder="1-st"
+               oninvalid="return false">
+        <br/>
+        <label for="seconds1">Seconds</label>
+        <input name="seconds2" id="seconds2"
+               type="number" step="1" min="0" max="60"
+               placeholder="2-nd"
+               oninvalid="return false">
+        <input name="seconds1" id="seconds1"
+               type="number" step="1" min="0" max="60"
+               placeholder="1-st"
+               oninvalid="return false">
+        <br/><br/>
+        <input type="submit" id="sub3"
+               value="Calculate"
+               class="button"
+               onclick="jetLag(
+                   document.getElementById('hours1').value,
+                   document.getElementById('minutes1').value,
+                   document.getElementById('seconds1').value,
+                   document.getElementById('hours2').value,
+                   document.getElementById('minutes2').value,
+                   document.getElementById('seconds2').value
+                   )">
+    </form>
+
+</header>
+
 </body>
 </html>
